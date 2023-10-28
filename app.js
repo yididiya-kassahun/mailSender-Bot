@@ -100,13 +100,25 @@ bot.on('message', (msg) => {
                 // You now have all the user inputs in userState
                 const { receiverMail, subject, body } = userState;
                 // Do something with the inputs, e.g., send the email
-               const mailResult = sendMail(receiverMail,subject,body);
-               bot.sendMessage(chatId,'Loading ... ');
 
-               setTimeout(()=>{
-                   bot.sendMessage(chatId, mailResult);
-               },4000);
+               confrimData(msg,chatId,receiverMail,subject,body,(result) => {
+                console.log("Result: " + result);
 
+                if(result){
+                    const mailResult = sendMail(receiverMail,subject,body);
+                    bot.sendMessage(chatId,'Loading ... ');
+     
+                    setTimeout(()=>{
+                        bot.sendMessage(chatId, mailResult);
+                    },4000);
+ 
+                }else{
+ 
+                 bot.sendMessage(chatId,'Email calceled');
+                 //bot.stopPolling();
+                }
+              });
+                
                 // Clear the conversation state
                 delete conversationState[chatId];
 
@@ -130,6 +142,29 @@ function sendMail(receiverMail,subject,body){
     }catch(err){
         throw err;
     }
+}
+
+function confrimData(msg,chatId,receiverMail,subject,body,callback){
+
+    const opts = {
+        reply_to_message_id: msg.message_id,
+        reply_markup: JSON.stringify({
+        inline_keyboard: 
+        [
+            [{ text: 'Cancel',callback_data: 'Cancel' }, { text: 'Send',callback_data: 'Send' }]
+        ]
+    })
+  };
+
+  bot.sendMessage(chatId,'Receiver Email: \n'+receiverMail +'\n\n Subject:\n'+subject+'\n\n Message: \n'+body,opts);
+
+  bot.on('callback_query', (query) => {
+    if (query.data === 'Cancel') {
+      callback(false);
+    } else if (query.data === 'Send') {
+      callback(true);
+    }
+  });
 }
 
 bot.onText(/developer/, (msg) => {
