@@ -51,9 +51,9 @@ GMAIL_PASS=<Your Gmail password>
 
 2. Use the following commands to interact with the bot:
 
-/start: Initialize the bot.
-/send: Compose and send an email.
-/developer: Get developer information
+/start: Initialize the bot. \n
+/send: Compose and send an email. \n
+/developer: Get developer information \n
 
 # Contributions
 Contributions to this project are welcome. Feel free to open issues, submit pull requests, or provide suggestions for improvements.
