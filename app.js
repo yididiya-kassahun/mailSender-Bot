@@ -9,13 +9,9 @@ const transporter = nodemailer.createTransport({
         port: 465,
         secure: true,
         auth: {
-          user: "",
-          pass: "", 
+          user: "", // add gmail 
+          pass: "",  // add gmail application password
         },
-    //   auth: { pjby qlox pmyv qfyq
-    //     api_key:
-    //       "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",
-    //   },
     });
 
 // ************* Bot
@@ -132,7 +128,7 @@ function sendMail(receiverMail,subject,body){
     try{
         transporter.sendMail({
             to: receiverMail,
-            from: "yididiya.tech@gmail.com",
+            from: "", // add your gmail address
             subject: subject,
             text: body
           });
