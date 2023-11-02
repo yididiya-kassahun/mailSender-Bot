@@ -42,8 +42,8 @@ Follow these steps to set up the Email Sender Telegram Bot:
 TELEGRAM_BOT_TOKEN=<Your Telegram Bot API Token>
 GMAIL_USER=<Your Gmail email address>
 GMAIL_PASS=<Your Gmail password>
-```bash
- npm start
+
+``bash npm start
 
 Usage
 1. Start a chat with your bot on Telegram.
