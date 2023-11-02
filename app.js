@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 const TelegramBot = require("node-telegram-bot-api");
 const TOKEN =
-  process.env.TELEGRAM_TOKEN ||
-  "6706961711:AAFwrG9h27qkYT65iVe8jJlTthrK-j6RBrU";
+  process.env.TELEGRAM_TOKEN || "";
 
 
 const transporter = nodemailer.createTransport({
